@@ -1,0 +1,37 @@
+REPORT for miniproject_intal_library:	(PES1201801896)
+
+I have defined 3 static helper functions namely stripping_zeroes(), adding_zeroes(), longDivision(), int_to_str() and intal_heapify()
+stripping_zeroes is used to remove the preceding zeroes in the parameter passed to it, adding_zeroes adds 'n' succeeding zeroes to the paramter passed, and intal_heapify is used to construct a heap like structure of intal arrays.
+
+Now coming to the implementation of non-static functions.
+1) intal_add(): I have allocated a memory of max(len(intal1), len(intal2))+2 as result. +2 because one for the carry if it exists and one for null terminator. I add the numbers of both the intals one by one starting from their respective string lengths till they are greater than -1. When one of the intal has reached its index less than 0, then only the index of other intal is reduced and added to the result. The numbers are subtracted from 48 because they are characters represented in ASCII numbers. And finally the carry is stored if there is any. If there is no carry, it is stripped off using the static function stripping_zeroes()
+
+2) intal_compare(): Straight up, I compare the lengths of two intals and return appropriate values. If the lengths are same then, I compare the numbers one by one from the end of string length. When both the numbers are same, I return 0. Else appropriate values are returned.
+
+3) intal_diff(): At first I compare the two intals to know which number is greater so as to subtract larger number from smaller number. If they are same, then I return "0" which is dynamically allocated. Else, Similar to intal_add(), I allocate a memory of max(len(intal1), len(intal2))+1 as result using malloc(). +1 for null terminator, since the result can't be more than the length of either of the two intals. Then, I perform the subtraction one digit at a time using a carry like we studied in school. Carry is made one if the (subtraction_result(ie temp in code) < 0). Finally the result is passed through stripping_zeroes() function to remove any preceding zeroes.
+
+4) intal_multiply(): All the base cases are checked and dealt with in the beginning. An array of 1000 integer numbers is created and product of combination of digits of both the intals are stored in their respective indices. Then the numbers in each index of the array is added and carry is forwarded. Finally the array is converted to string by adding 48 to each character of the array and returned.
+
+5) intal_mod(): I copy intal1 in a and intal2 in b, then, I add zeroes in the end of b so that length is same as a, and compare the two intals and store the result in comp. And then repeatedly subtract b from a till a is less than b. This process repeats till intal1 is less than the intal2 that has been passed. And finally the result is returned.
+
+6) intal_pow(): It is calculated by dividing the power by half and computing each halves repeatedly. If the power is even, then a^n = a^(n/2) * a^(n/2), else a^n = a^(n/2) * a^(n/2) * a.
+
+7) intal_gcd(): It is calculated using Euclid's theorem, ie gcd(a, b) = gcd(b, mod(a,b)). And base cases are gcd(a, 0) = a and gcd(0, b) = b
+
+8) intal_fibonacci(): It is calculated by storing the previous two numbers in fibonacci series(n) and adding them. ie sliding window of 2 type of algorithm
+
+9) intal_factorial(): This can be calculated by the usual way of incrementing a count starting from 1 till n and mutiplying the count with the result.
+
+10) intal_bincoeff(): In the beginning, I create a DP table of k+1 size, and then I store the value of nC0, nC1, nC2 ... till nCk using the previous coefficient, ie nCi = nC(i-1) * (n+1-i)/i. (n+1-i) is converted from int to string and multiplied with nC(i-1) and then the product is divided by i using long division. Finally I return dp[k].
+
+11) intal_max(): This is calculated by initally assuming the max number is at index 0 and comparing the a[max] with a[i] where i iterates from n-1 to 0.
+
+12) intal_min(): This is calculated the similar way as intal_max(), where we assign min = index of minimum value of a[i] and a[min].
+
+13) intal_search(): This is done by linear search, where each intal from index 0 to n is compared with key.
+
+14) intal_binsearch(): This is implemented as binary search algorithm that we know where we minimise the range of array each time, until we find the key. When mid matches with the key, we decrement the mid until a[mid] == key, since we have to return the first occurence.
+
+15) intal_sort(): This is done using the heapSort way that we have studied, where the minimum number in the array is placed at the array[0] each time.
+
+16) coin_row_problem(): This is solved in O(n) time complexity and O(1) extra space by using the sliding window of three variables that we have studied in the dynamic programming class. The coin row problem for i from 0 to n is found using the previous values that we have got.
